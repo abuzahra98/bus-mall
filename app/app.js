@@ -26,6 +26,8 @@ let imageSection = document.getElementById( 'results' );
 let leftImage = document.getElementById( 'leftImage' );
 let centertImage = document.getElementById( 'cinterImage' );
 let rightImage = document.getElementById( 'rightImage' );
+let ButtonCounter = document.getElementById( 'add' );
+let textCounter = document.getElementById( 'counter' );
 
 
 let leftGoatIndex = 0;
@@ -33,7 +35,7 @@ let rightGoatIndex = 0;
 let cinterGoatIndex = 0;
 
 
-const clickCounter = 23;
+let clickCounter = 0;
 
 function item( name ) {
     this.name = name;
@@ -89,8 +91,26 @@ do {
     // rightImage.src = item.all[0].image;
   }
   
+  function bt1()
+  {
+   
+    if(textCounter.value !=undefined && textCounter.value >0 && textCounter.value <25)
+    {
+       clickCounter=textCounter.value-1;
+      buttonShowResult.addEventListener('click',showData);
+  
+  
+  imageSection.addEventListener( 'click', handelClick );
+    }
+    else{
+      alert('please insert 1 to 25')
+    }
+  }
   function handelClick( event ) {
+    
  
+
+
     if( item.counter <= clickCounter ) {
       
       const clickedElement = event.target;
@@ -122,7 +142,7 @@ do {
     {
         buttonShowResult.style.display='block';
     }
-    
+  
   }
   function showData(event)
   {
@@ -137,10 +157,10 @@ do {
   
     imageSection.removeEventListener( 'click', handelClick,true );
   }
-  buttonShowResult.addEventListener('click',showData);
   
-  
-  imageSection.addEventListener( 'click', handelClick );
+
+
+  ButtonCounter.addEventListener( 'click', bt1 );
  
   console.log( 'ffdgfg',item.all );
   
