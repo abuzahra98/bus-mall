@@ -1,3 +1,4 @@
+'use strict';
 let shopitem = [
     'bag',
     'banana',
@@ -94,7 +95,7 @@ do {
   function bt1()
   {
    
-    if(textCounter.value !=undefined && textCounter.value >0 && textCounter.value <25)
+    if(textCounter.value !=undefined && textCounter.value >0 && textCounter.value <=25)
     {
        clickCounter=textCounter.value-1;
       buttonShowResult.addEventListener('click',showData);
