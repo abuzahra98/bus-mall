@@ -1,25 +1,25 @@
 'use strict';
 let shopitem = [
-    'bag',
-    'banana',
-    'bathroom',
-    'boots',
-    'breakfast',
-    'bubblegum',
-    'chair',
-    'cthulhu' ,
-    'dog-duck',
-    'dragon',
-    'pen',
-    'pet-sweep',
-    'scissors',
-    'shark',
-    'sweep' ,
-    'tauntaun',
-    'unicorn',
-    'usb',
-    'water-can',
-    'wine-glass'
+    'bag.jpg',
+    'banana.jpg',
+    'bathroom.jpg',
+    'boots.jpg',
+    'breakfast.jpg',
+    'bubblegum.jpg',
+    'chair.jpg',
+    'cthulhu.jpg' ,
+    'dog-duck.jpg',
+    'dragon.jpg',
+    'pen.jpg',
+    'pet-sweep.jpg',
+    'scissors.jpg',
+    'shark.jpg',
+    'sweep.png' ,
+    'tauntaun.jpg',
+    'unicorn.jpg',
+    'usb.gif',
+    'water-can.jpg',
+    'wine-glass.jpg'
   ];
   let buttonShowResult = document.getElementById('show_result');
   let ulShowResult = document.getElementById('show_data')
@@ -30,6 +30,9 @@ let rightImage = document.getElementById( 'rightImage' );
 let ButtonCounter = document.getElementById( 'add' );
 let textCounter = document.getElementById( 'counter' );
 
+let clickArray=[];
+let showArray=[];
+let previousImg=[];
 
 let leftGoatIndex = 0;
 let rightGoatIndex = 0;
@@ -40,7 +43,7 @@ let clickCounter = 0;
 
 function item( name ) {
     this.name = name;
-    this.image = `./img/${name}.jpg`;
+    this.image = `./img/${name}`;
     this.clicks = 0;
     this.show = 0;
     item.all.push( this );
@@ -51,22 +54,33 @@ function item( name ) {
   
   for( let i = 0; i < shopitem.length; i++ ) {
     new item( shopitem[i] );
+    
   }
+ 
+ 
+
   
   function renderNewGoat() {
     buttonShowResult.style.display='none';
     ulShowResult.style.display='none';
-    let leftIndex = randomNumber( 0, item.all.length - 1 );
+    let rightIndex;
+    let centertIndex;
+    let leftIndex ;
+    do {
+      leftIndex = randomNumber( 0, item.all.length - 1 );
+    } while( leftIndex == rightIndex|| previousImg[0]==leftIndex||previousImg[1]==leftIndex||previousImg[2]==leftIndex);
+
+    // let leftIndex = randomNumber( 0, item.all.length - 1 );
     leftImage.src = item.all[leftIndex].image;
     leftImage.alt = item.all[leftIndex].name;
     leftGoatIndex = leftIndex;
 
     
   
-    let rightIndex;
+    
     do {
       rightIndex = randomNumber( 0, item.all.length - 1 );
-    } while( leftIndex == rightIndex );
+    } while( leftIndex == rightIndex || previousImg[0]==rightIndex||previousImg[1]==rightIndex||previousImg[2]==rightIndex);
 
    
     
@@ -74,15 +88,20 @@ function item( name ) {
     rightImage.alt = item.all[rightIndex].name;
     rightGoatIndex = rightIndex;
     
-    let centertIndex;
+   
 do {
     centertIndex = randomNumber( 0, item.all.length - 1 );
-    } while( leftIndex == centertIndex || rightIndex == centertIndex);
+    } while( leftIndex == centertIndex || rightIndex == centertIndex || previousImg[0]==centertIndex||previousImg[1]==centertIndex||previousImg[2]==centertIndex);
 
     centertImage.src = item.all[centertIndex].image;
     centertImage.alt = item.all[centertIndex].name;
     cinterGoatIndex = rightIndex;
   
+
+    previousImg[1]=rightIndex;
+    previousImg[2]=centertIndex;
+    previousImg[0]=leftIndex;
+
     item.all[leftIndex].show++;
     item.all[rightIndex].show++;
     item.all[centertIndex].show++;
@@ -142,6 +161,12 @@ do {
     }else
     {
         buttonShowResult.style.display='block';
+        for( let i = 0; i < item.all.length; i++ ) {
+          showArray.push(item.all[i].show);
+          clickArray.push(item.all[i].clicks);
+       
+         }
+       
     }
   
   }
@@ -153,10 +178,10 @@ do {
         ulShowResult.appendChild(liElement);
         liElement.textContent=item.all[y].name+' had '+ item.all[y].clicks+ ' votes, and was seen '+item.all[y].show+' times.'
     }
-    buttonShowResult.removeEventListener('click',showData,true);
+    buttonShowResult.removeEventListener('click',showData);
+    showChart();
   
-  
-    imageSection.removeEventListener( 'click', handelClick,true );
+    imageSection.removeEventListener( 'click', handelClick);
   }
   
 
@@ -170,4 +195,125 @@ do {
     return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
   }
   
+  function showChart()
+  {
+    var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {         
+          labels: shopitem,
+          datasets: [{
+              label: '# of Votes',           
+               data: clickArray,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)',
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)',
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)',
+              ],
+              borderWidth: 1
+          },
+        
+        
+          {
+            label: '# of Shown',          
+             data: showArray,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+            ],
+            borderWidth: 1
+        }
+        
+        ]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });
+  }
   renderNewGoat();
