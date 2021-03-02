@@ -42,6 +42,7 @@ body {
   ul{
     column-count: 2;
     font-size: large;
+    line-height: 1.5;
 
   }
   input{

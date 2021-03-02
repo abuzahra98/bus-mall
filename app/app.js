@@ -47,18 +47,25 @@ function item( name ) {
     this.clicks = 0;
     this.show = 0;
     item.all.push( this );
+    localStorage.setItem('data',JSON.stringify(item.all))
+
   }
   
   item.all = [];
   item.counter = 0;
-  
-  for( let i = 0; i < shopitem.length; i++ ) {
-    new item( shopitem[i] );
-    
-  }
- 
- 
+  if(JSON.parse(localStorage.getItem('data'))){
+    item.all = JSON.parse(localStorage.getItem('data'));
 
+  }else
+  {
+    for( let i = 0; i < shopitem.length; i++ ) {
+      new item( shopitem[i] );
+      
+    }
+  }
+  
+
+ 
   
   function renderNewGoat() {
     buttonShowResult.style.display='none';
@@ -118,7 +125,7 @@ do {
     {
        clickCounter=textCounter.value-1;
       buttonShowResult.addEventListener('click',showData);
-  
+
   
   imageSection.addEventListener( 'click', handelClick );
     }
@@ -166,7 +173,8 @@ do {
           clickArray.push(item.all[i].clicks);
        
          }
-       
+         localStorage.setItem('data',JSON.stringify(item.all))
+
     }
   
   }
@@ -179,12 +187,13 @@ do {
         liElement.textContent=item.all[y].name+' had '+ item.all[y].clicks+ ' votes, and was seen '+item.all[y].show+' times.'
     }
     buttonShowResult.removeEventListener('click',showData);
+    
+  
+    imageSection.removeEventListener( 'click', handelClick); 
     showChart();
-  
-    imageSection.removeEventListener( 'click', handelClick);
-  }
-  
 
+  }
+ 
 
   ButtonCounter.addEventListener( 'click', bt1 );
  
@@ -316,4 +325,12 @@ do {
       }
   });
   }
+
+
+
+
+
+
+
   renderNewGoat();
+
