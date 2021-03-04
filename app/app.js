@@ -40,7 +40,7 @@ let cinterGoatIndex = 0;
 
 
 let clickCounter = 0;
-
+//this is an object
 function item( name ) {
     this.name = name;
     this.image = `./img/${name}`;
@@ -66,7 +66,7 @@ function item( name ) {
   
 
  
-  
+  //this function is render  to show photo
   function renderNewGoat() {
     buttonShowResult.style.display='none';
     ulShowResult.style.display='none';
@@ -117,7 +117,7 @@ do {
   
     // rightImage.src = item.all[0].image;
   }
-  
+  //yhis function to calculate hou many number in text box and comper it in the if condeyion
   function bt1()
   {
    
@@ -203,7 +203,7 @@ do {
   function randomNumber( min, max ) {
     return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
   }
-  
+  //this function to show chart
   function showChart()
   {
     var ctx = document.getElementById('myChart').getContext('2d');

@@ -1,6 +1,7 @@
 body {
     text-align: center;
     background-color: rgb(190, 231, 231);
+    width: auto;
   
   }
  
@@ -10,6 +11,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 600;
     background-color: gray;
+    
   }
  
    h4 {
@@ -30,7 +32,7 @@ body {
   }
  
    section {
-    width: 100%;
+    width: 1100px;
     margin: 0 15%;
     text-align: left;
   }
@@ -52,5 +54,8 @@ body {
       background-color: darkolivegreen;
       height: 30px;
     }
-
-    
+div{
+  height: 600px;
+  width: 600px;
+  margin-left: 400px;
+    } 
